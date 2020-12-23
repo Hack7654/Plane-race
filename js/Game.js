@@ -32,6 +32,8 @@ class Game {
       // player.getCount();
       form = new Form()
       form.display();
+      player.updateEndCount(0);
+    
     }
   }
 
@@ -39,10 +41,17 @@ class Game {
     background("#696969");
     // line(x1,y1,x2,y2)
     player.getProgress();
+    player.getEndCount();
     if(allPlayers !== undefined){
-      strokeWeight(7);
+
+      push();
+      strokeWeight(50);
       stroke("red");
-      line(0, -2000, 600, -2000);
+      line(0, -2000, windowWidth, -2000);
+      textSize(50)
+      text("END",windowWidth/2,-2000)
+      pop();
+
       for (var i = 0; i < this.cloudPos.length; i++) {
         image(cloudImg, this.cloudPos[i][0], this.cloudPos[i][1], 150, 100)
       }
@@ -66,6 +75,13 @@ class Game {
           airplane.x = airplane.x - 10;
           player.updateProgress();
         }
+        if(airplane.y<-2000){
+          EndCount = EndCount + 1;
+          player.updateEndCount(EndCount);
+          gameState = 2;
+          player.rank = EndCount;
+        }
+        
       }
       if (playerCount === 2) {
         camera.position.x = displayWidth / 2;
@@ -84,8 +100,15 @@ class Game {
           airplane2.x = airplane2.x - 10;
           player.updateProgress();
         }
-  
+        if(airplane2.y<-2000){
+          EndCount = EndCount + 1;
+          player.updateEndCount(EndCount);
+          gameState = 2;
+          player.rank = EndCount;
+        }
       }
+
+      
   
     }
     
