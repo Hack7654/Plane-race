@@ -12,6 +12,8 @@ var airplane2;
 
 var airplaneImg;
 var cloudImg;
+var EndCount;
+var title1; 
 
 var allPlayers; 
 function preload(){
@@ -28,11 +30,11 @@ function setup(){
   game.start();
   playerCount=1;
 
-  airplane=createSprite(30,140,30,30);
+  airplane=createSprite(windowWidth/2,140,30,30);
   airplane.addImage(airplaneImg);
   
   
-  airplane2=createSprite(200,140,30,30);
+  airplane2=createSprite(windowWidth/4,140,30,30);
   airplane2.addImage(airplane2Img);
    
   
@@ -48,11 +50,20 @@ function draw(){
   if(gameState === 0 ){
     game.getState()
   }
-  if(playerCount === 2 && player.name){
+  if(playerCount === 2 && player.name && gameState === 0){
     gameState=1;
     game.update(1);
   }
    if(gameState === 1){
      game.play();
    }
+   if(EndCount === 2){
+    game.update(2);
+   }
+    if(gameState === 2){
+      background("purple");
+      title1 = createElement('h1')
+      title1.html(player.name + " got the Rank " + player.rank);
+      title1.position(displayWidth/2, displayHeight/2);      
+  }                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
 }
