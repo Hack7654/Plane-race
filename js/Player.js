@@ -1,6 +1,7 @@
 class Player {
   constructor(){
     this.name = null;
+    this.rank = null;
   }
 
   getCount(){
@@ -11,9 +12,22 @@ class Player {
     })
   }    
 
+  getEndCount(){
+    var EndCountRef = database.ref(secret+'/EndCount');
+    EndCountRef.on("value",function(data){
+      EndCount = data.val();
+      console.log(EndCount);
+    })
+  }  
+
   updateCount(count){
     database.ref(secret+'/').update({
       playerCount: count
+    });
+  }
+  updateEndCount(count){
+    database.ref(secret+'/').update({
+      EndCount: count
     });
   }
 
@@ -24,7 +38,7 @@ class Player {
     database.ref(playerIndex).set({
       name:name,
       position: {
-        x: 50*playerCount,
+        x: windowWidth/(2*playerCount),
         y:140
       }
     });
